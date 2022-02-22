@@ -24,9 +24,9 @@ impl Hashtable {
         todo!();
     }
 
-	fn get_hash(&self, key: &str) -> u64 {
-		let mut s = DefaultHasher::new();
-		key.hash(&mut s);
-		s.finish() % self.bucket_size
-	}
+    fn get_hash(&self, key: &str) -> u64 {
+        let mut s = DefaultHasher::new();
+        key.hash(&mut s);
+        s.finish() % self.bucket_size
+    }
 }

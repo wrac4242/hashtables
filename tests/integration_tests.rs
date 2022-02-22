@@ -38,7 +38,7 @@ fn inserting_removing() {
     let mut ht = hashtables::Hashtable::new(1);
     ht.insert("key", "value").unwrap();
     ht.remove("key").unwrap();
-	assert_eq!(ht.get("key"), Err(()));
+    assert_eq!(ht.get("key"), Err(()));
 }
 
 #[test]
