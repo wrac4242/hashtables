@@ -22,17 +22,15 @@ fn inserting_getting_multiple() {
 }
 
 #[test]
-#[should_panic]
 fn errors_insert_if_key_blank() {
 	let mut ht = hashtables::Hashtable::new(1);
-	ht.insert("", "value4").unwrap();
+	assert_eq!(ht.insert("", "value4"), Err(()));
 }
 
 #[test]
-#[should_panic]
 fn errors_insert_not_set_key() {
 	let mut ht = hashtables::Hashtable::new(1);
-	ht.insert("key", "").unwrap();
+	assert_eq!(ht.insert("key", ""), Err(()));
 }
 
 #[test]
@@ -75,15 +73,13 @@ fn inserting_removing_collision() {
 }
 
 #[test]
-#[should_panic]
 fn errors_remove_not_set_key() {
 	let mut ht = hashtables::Hashtable::new(1);
-	ht.remove("").unwrap();
+	assert_eq!(ht.remove(""), Err(()));
 }
 
 #[test]
-#[should_panic]
 fn errors_remove_wrong_key() {
 	let mut ht = hashtables::Hashtable::new(1);
-	ht.remove("key").unwrap();
+	assert_eq!(ht.remove("key"), Err(()));
 }
