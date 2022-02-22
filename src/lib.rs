@@ -1,9 +1,12 @@
+use std::collections::hash_map::DefaultHasher;
+use std::hash::{Hash, Hasher};
+
 pub struct Hashtable {
-    bucket_size: u32,
+    bucket_size: u64,
 }
 
 impl Hashtable {
-    pub fn new(bucket_size: u32) -> Hashtable {
+    pub fn new(bucket_size: u64) -> Hashtable {
         Hashtable {
             bucket_size: bucket_size,
         }
@@ -20,4 +23,10 @@ impl Hashtable {
     pub fn remove(&mut self, key: &str) -> Result<(), ()> {
         todo!();
     }
+
+	fn get_hash(&self, key: &str) -> u64 {
+		let mut s = DefaultHasher::new();
+		key.hash(&mut s);
+		s.finish() % self.bucket_size
+	}
 }
