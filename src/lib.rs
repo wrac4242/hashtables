@@ -8,14 +8,12 @@ pub struct Hashtable {
 struct HashtableData<'a> {
     key: &'a str,
     value: &'a str,
-    next: Option<&'a HashtableData<'a>>
+    next: Option<&'a HashtableData<'a>>,
 }
 
 impl Hashtable {
     pub fn new(bucket_size: u64) -> Hashtable {
-        Hashtable {
-            bucket_size: bucket_size,
-        }
+        Hashtable { bucket_size }
     }
 
     pub fn insert(&mut self, key: &str, value: &str) -> Result<(), ()> {
