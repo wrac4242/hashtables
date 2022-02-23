@@ -5,6 +5,12 @@ pub struct Hashtable {
     bucket_size: u64,
 }
 
+struct HashtableData<'a> {
+    key: &'a str,
+    value: &'a str,
+    next: Option<&'a HashtableData<'a>>
+}
+
 impl Hashtable {
     pub fn new(bucket_size: u64) -> Hashtable {
         Hashtable {
@@ -13,6 +19,7 @@ impl Hashtable {
     }
 
     pub fn insert(&mut self, key: &str, value: &str) -> Result<(), ()> {
+        // overwrites if same key
         todo!();
     }
 

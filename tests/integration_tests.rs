@@ -82,3 +82,11 @@ fn errors_remove_wrong_key() {
     let mut ht = hashtables::Hashtable::new(1);
     assert_eq!(ht.remove("key"), Err(()));
 }
+
+#[test]
+fn two_identical_keys() {
+    let mut ht = hashtables::Hashtable::new(1);
+    ht.insert("key", "value").unwrap();
+    ht.insert("key", "value1").unwrap();
+    assert_eq!(ht.get("key"), Ok("value1"));
+}
