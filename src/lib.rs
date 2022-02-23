@@ -15,10 +15,10 @@ struct HashtableData {
 }
 
 impl HashtableData {
-    pub fn new() -> HashtableData {
+    pub fn new(key: String, value: String) -> HashtableData {
         HashtableData {
-            key: String::new(),
-            value: String::new(),
+            key,
+            value,
             next: None,
         }
     }
@@ -28,7 +28,7 @@ impl Hashtable {
     pub fn new(bucket_size: u64) -> Hashtable {
         Hashtable {
             bucket_size,
-            buckets: iter::repeat(Some(Box::new(HashtableData::new())))
+            buckets: iter::repeat(None)
                 .take(bucket_size as usize)
                 .collect(),
         }
@@ -36,12 +36,27 @@ impl Hashtable {
 
     pub fn insert(&mut self, _key: &str, _value: &str) -> Result<(), ()> {
         // overwrites if same key
+        // attaches to the bottom due to overwrite 
         todo!();
     }
 
-    pub fn get(&self, _key: &str) -> Result<&str, ()> {
-        todo!();
+    pub fn get(&self, key: &str) -> Result<&str, ()> {
+        let hash = self.get_hash(key);
+        let mut to_check = &self.buckets[hash as usize];
+        loop {
+            match to_check {
+                Some(data) => {
+                    if data.key == key {
+                        return Ok(&data.value)
+                    } else {
+                        to_check = &data.next;
+                    }
+                }
+                None => return Err(()),
+            };
+        }
     }
+
 
     pub fn remove(&mut self, _key: &str) -> Result<(), ()> {
         todo!();
