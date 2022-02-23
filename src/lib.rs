@@ -3,29 +3,30 @@ use std::hash::{Hash, Hasher};
 
 pub struct Hashtable {
     bucket_size: u64,
+    buckets: Vec<Option<Box<HashtableData>>>,
 }
 
-struct HashtableData<'a> {
-    key: &'a str,
-    value: &'a str,
-    next: Option<&'a HashtableData<'a>>,
+struct HashtableData {
+    pub key: String,
+    pub value: String,
+    pub next: Option<Box<HashtableData>>,
 }
 
 impl Hashtable {
     pub fn new(bucket_size: u64) -> Hashtable {
-        Hashtable { bucket_size }
+        Hashtable { bucket_size, buckets: vec![] }
     }
 
-    pub fn insert(&mut self, key: &str, value: &str) -> Result<(), ()> {
+    pub fn insert(&mut self, _key: &str, _value: &str) -> Result<(), ()> {
         // overwrites if same key
         todo!();
     }
 
-    pub fn get(&self, key: &str) -> Result<&str, ()> {
+    pub fn get(&self, _key: &str) -> Result<&str, ()> {
         todo!();
     }
 
-    pub fn remove(&mut self, key: &str) -> Result<(), ()> {
+    pub fn remove(&mut self, _key: &str) -> Result<(), ()> {
         todo!();
     }
 
