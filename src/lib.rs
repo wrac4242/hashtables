@@ -28,15 +28,13 @@ impl Hashtable {
     pub fn new(bucket_size: u64) -> Hashtable {
         Hashtable {
             bucket_size,
-            buckets: iter::repeat(None)
-                .take(bucket_size as usize)
-                .collect(),
+            buckets: iter::repeat(None).take(bucket_size as usize).collect(),
         }
     }
 
     pub fn insert(&mut self, _key: &str, _value: &str) -> Result<(), ()> {
         // overwrites if same key
-        // attaches to the bottom due to overwrite 
+        // attaches to the bottom due to overwrite
         todo!();
     }
 
@@ -47,7 +45,7 @@ impl Hashtable {
             match to_check {
                 Some(data) => {
                     if data.key == key {
-                        return Ok(&data.value)
+                        return Ok(&data.value);
                     } else {
                         to_check = &data.next;
                     }
@@ -56,7 +54,6 @@ impl Hashtable {
             };
         }
     }
-
 
     pub fn remove(&mut self, _key: &str) -> Result<(), ()> {
         todo!();
