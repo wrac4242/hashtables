@@ -90,3 +90,12 @@ fn two_identical_keys() {
     ht.insert("key", "value1").unwrap();
     assert_eq!(ht.get("key"), Ok("value1"));
 }
+
+#[test]
+fn second_stage_two_identical_keys() {
+    let mut ht = hashtables::Hashtable::new(1);
+    ht.insert("irrelavant", "pizza").unwrap();
+    ht.insert("key", "value").unwrap();
+    ht.insert("key", "value1").unwrap();
+    assert_eq!(ht.get("key"), Ok("value1"));
+}

@@ -46,23 +46,22 @@ impl Hashtable {
         let current = &mut self.buckets[hash as usize];
         let to_write = HashtableData::new(key.to_string(), value.to_string());
         if current.is_none() {
-            println!("is none");
             self.buckets[hash as usize] = Some(Box::new(to_write));
             Ok(())
         } else {
             let mut current = current.as_mut().unwrap();
-            if current.key == key.to_string() {
+            if current.key == *key {
                 current.value = value.to_string();
                 println!("{:?}, {:?}", value, current.value);
                 return Ok(());
                 }
             while current.next.is_some() {
+                current = current.next.as_mut().unwrap();
                 if current.key == key.to_string() {
                     current.value = value.to_string();
                     println!("{:?}, {:?}", value, current.value);
                     return Ok(());
                 }
-                current = current.next.as_mut().unwrap();
             }
             current.next = Some(Box::new(to_write));
             Ok(())
