@@ -32,10 +32,41 @@ impl Hashtable {
         }
     }
 
-    pub fn insert(&mut self, _key: &str, _value: &str) -> Result<(), ()> {
+    pub fn insert(&mut self, key: &str, value: &str) -> Result<(), ()> {
         // overwrites if same key
         // attaches to the bottom due to overwrite
-        todo!();
+        if key.is_empty() {
+            return Err(());
+        }
+        if value.is_empty() {
+            return Err(());
+        }
+
+        let hash = self.get_hash(key);
+        let current = &mut self.buckets[hash as usize];
+        let to_write = HashtableData::new(key.to_string(), value.to_string());
+        if current.is_none() {
+            println!("is none");
+            self.buckets[hash as usize] = Some(Box::new(to_write));
+            Ok(())
+        } else {
+            let mut current = current.as_mut().unwrap();
+            if current.key == key.to_string() {
+                current.value = value.to_string();
+                println!("{:?}, {:?}", value, current.value);
+                return Ok(());
+                }
+            while current.next.is_some() {
+                if current.key == key.to_string() {
+                    current.value = value.to_string();
+                    println!("{:?}, {:?}", value, current.value);
+                    return Ok(());
+                }
+                current = current.next.as_mut().unwrap();
+            }
+            current.next = Some(Box::new(to_write));
+            Ok(())
+        }
     }
 
     pub fn get(&self, key: &str) -> Result<&str, ()> {

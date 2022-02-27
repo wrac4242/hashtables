@@ -28,7 +28,7 @@ fn errors_insert_if_key_blank() {
 }
 
 #[test]
-fn errors_insert_not_set_key() {
+fn errors_insert_not_set_value() {
     let mut ht = hashtables::Hashtable::new(1);
     assert_eq!(ht.insert("key", ""), Err(()));
 }
