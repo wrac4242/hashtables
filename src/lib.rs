@@ -57,7 +57,7 @@ impl Hashtable {
                 }
             while current.next.is_some() {
                 current = current.next.as_mut().unwrap();
-                if current.key == key.to_string() {
+                if current.key == *key {
                     current.value = value.to_string();
                     println!("{:?}, {:?}", value, current.value);
                     return Ok(());
